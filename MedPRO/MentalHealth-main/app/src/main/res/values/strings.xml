@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Hygieia</string>
+    <string name="main_activity_description">Un mod de a comunica mai usor cu medicul tau</string>
+
+    <string name="login">Conectare</string>
+    <string name="chat_with_mentor">Discuta cu medicul</string>
+
+    <!-- NOTIFICATION SERVICE -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_title">"Aveti o noua notificare"</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="error_not_connected"></string>
+    <string name="error_authentication_canceled">Programare anulata&#8230;</string>
+    <string name="error_no_internet">Nu exista conexiune la internet!</string>
+    <string name="error_unknown_error">Eroare&#8230;</string>
+    <string name="connection_succeed">Logare cu succes</string>
+    <string name="button_login_text_logged">Profil</string>
+    <string name="button_login_text_not_logged">Conectare</string>
+
+    <!-- LOGIN ACTIVITY -->
+    <string name="toolbar_title_login_activity">Profil</string>
+    <string name="text_input_username">Utilizator</string>
+    <string name="text_view_email">Adresa email :</string>
+    <string name="button_update_account">Edit nume utilizator</string>
+    <string name="button_delete_account">Sterge cont</string>
+    <string name="button_sign_out_account">SignOut</string>
+    <string name="info_no_email_found"></string>
+    <string name="info_no_username_found"></string>
+    <string name="popup_message_confirmation_delete_account">Sigur doriți să vă ștergeți contul?</string>
+    <string name="popup_message_choice_yes">Da</string>
+    <string name="popup_message_choice_no">Nu</string>
+    <string name="check_box_is_mentor">Sunteti specialist?</string>
+
+
+    <!-- Book api -->
+    <string name="thumbnail"></string>
+    <string name="title">Titlu</string>
+    <string name="category">Categorie</string>
+    <string name="price">40 $</string>
+    <string name="author">Autor</string>
+
+
+    <string name="search">Cauta</string>
+    <string name="hint">Introduceti numele cautat </string>
+    <string name="description_image_view"></string>
+    <string name="description_divider"></string>
+    <string name="Failed_to_Load_data"></string>
+    <string name="NO_RESULT">Nu s-au gasit rezultate</string>
+
+    <string-array name="fiche_type">
+        <item>Consult Online</item>
+        <item>Consult Fizic</item>
+    </string-array>
+
+    <string-array name="specialitate_spinner">
+        <item>Psihiatriu</item>
+        <item>Terapeut</item>
+        <item>Psiholog</item>
+
+    </string-array>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_0652316456">0652316456</string>
+
+</resources>
+
