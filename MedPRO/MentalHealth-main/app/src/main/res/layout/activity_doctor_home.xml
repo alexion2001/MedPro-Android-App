@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E5E5E5"
-    tools:context=".DoctorHomeActivity">
+    tools:context=".DoctorHomeActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-15dp">
 
 
     <ImageView
@@ -35,10 +37,29 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.852" />
+
+    <Button
+        android:id="@+id/drugsBtn"
+        android:layout_width="118dp"
+        android:layout_height="107dp"
+        android:background="@drawable/button_home"
+        android:fontFamily="@font/roboto"
+        android:gravity="bottom|center"
+        android:paddingBottom="8dp"
+        android:text="Lista Medicamente"
+        android:textAllCaps="false"
+        android:textColor="#3949AB"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.852" />
 
     <Button
         android:id="@+id/signOutBtn"
@@ -240,6 +261,20 @@
         app:srcCompat="@drawable/baseline_person_add_alt_1_24" />
 
     <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="47dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="80dp"
+        android:elevation="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/myCalendarBtn"
+        app:layout_constraintVertical_bias="0.166"
+        app:srcCompat="@drawable/ic_drug" />
+
+    <ImageView
         android:id="@+id/imageView11"
         android:layout_width="47dp"
         android:layout_height="41dp"
@@ -247,9 +282,10 @@
         android:elevation="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.244"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/myCalendarBtn"
-        app:layout_constraintVertical_bias="0.437"
+        app:layout_constraintVertical_bias="0.166"
         app:srcCompat="@drawable/baseline_calendar_month_24" />
 
 

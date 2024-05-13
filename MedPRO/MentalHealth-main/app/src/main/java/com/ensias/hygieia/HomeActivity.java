@@ -17,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
     Button BtnRequst;
     Button profile;
     Button appointment;
+    Button drugsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent k = new Intent(HomeActivity.this, ProfilePatientActivity.class);
+                startActivity(k);
+            }
+        });
+
+        drugsBtn = findViewById(R.id.drugsBtn);
+        drugsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(HomeActivity.this, DrugsActivity.class);
                 startActivity(k);
             }
         });

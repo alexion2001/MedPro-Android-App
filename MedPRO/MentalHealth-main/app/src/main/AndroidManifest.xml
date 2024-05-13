@@ -25,6 +25,7 @@
         <activity android:name=".MyPatientsActivity" />
         <activity android:name=".FirstSigninActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".DrugsActivity"/>
 
         <receiver android:name=".NotificationReceiver" />
 

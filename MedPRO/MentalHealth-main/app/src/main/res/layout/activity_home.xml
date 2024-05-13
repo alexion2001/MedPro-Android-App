@@ -70,15 +70,16 @@
         android:id="@+id/myDoctors"
         android:layout_width="105dp"
         android:layout_height="96dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/back2"
         android:text="Specialistii Mei"
         android:textColor="#F8F8F8"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
+
 
     <Button
         android:id="@+id/appointement2"
@@ -92,10 +93,27 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.671" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/drugsBtn"
+        android:layout_width="105dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginBottom="98dp"
+        android:background="@drawable/back2"
+        android:text="lista medicamente"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/profile"
@@ -109,10 +127,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.671" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/searchBtn"

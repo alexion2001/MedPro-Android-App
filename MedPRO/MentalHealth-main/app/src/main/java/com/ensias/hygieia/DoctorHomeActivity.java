@@ -32,6 +32,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements DatePickerD
     Button BtnRequst;
     Button listPatients;
     Button appointementBtn;
+    Button drugsBtn;
 
     private DatabaseHelper databaseHelper;
     private ActivityDoctorHomeBinding binding;
@@ -83,6 +84,15 @@ public class DoctorHomeActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View v) {
                 Intent k = new Intent(DoctorHomeActivity.this, ProfileDoctorActivity.class);
+                startActivity(k);
+            }
+        });
+
+        drugsBtn = findViewById(R.id.drugsBtn);
+        drugsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(DoctorHomeActivity.this, DrugsActivity.class);
                 startActivity(k);
             }
         });
