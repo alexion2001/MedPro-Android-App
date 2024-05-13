@@ -1,6 +1,7 @@
 package com.ensias.hygieia.adapter;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.TaskViewHolder
     }
     public void setData(List<DrugModel> newData) {
         this.localDataSet = newData;
+        Log.d("Drugs Adapter", "Response data adapter: " + newData);
+      //  notifyDataSetChanged();
     }
 
     @NonNull
@@ -56,8 +59,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.TaskViewHolder
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            taskTextNume = itemView.findViewById(R.id.title);
-            taskTextKey = itemView.findViewById(R.id.description_text);
+            taskTextNume = itemView.findViewById(R.id.drugName);
+            taskTextKey = itemView.findViewById(R.id.drugKey);
 
 
             layout = itemView.findViewById(R.id.container);
@@ -65,6 +68,8 @@ public class DrugAdapter extends RecyclerView.Adapter<DrugAdapter.TaskViewHolder
 
 
         public void bind(DrugModel item) {
+            Log.d("DrugsActivity", "Response data hereee: " + item.getKeywords());
+
             taskTextKey.setText(item.getKeywords());
             taskTextNume.setText(item.getName());
 

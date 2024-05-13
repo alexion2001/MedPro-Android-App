@@ -18,14 +18,14 @@
         android:layout_height="18dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_doctor_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/task_text"
+        app:layout_constraintBottom_toBottomOf="@id/drugName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
     tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/task_text"
+        android:id="@+id/drugName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,11 +33,11 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/iv_clock"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/description_text"
+        app:layout_constraintBottom_toTopOf="@+id/drugKey"
         tools:text="Drug Name" />
 
     <TextView
-        android:id="@+id/description_text"
+        android:id="@+id/drugKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
@@ -45,6 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/task_text" />
+        app:layout_constraintTop_toBottomOf="@id/drugName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
