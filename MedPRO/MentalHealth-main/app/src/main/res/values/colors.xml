@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="Albastruu">#50CCDB</color>
+    <color name="login_button_default_text">#FFFFFF</color>
+    <color name="login_button_pressed_text">#E0E0E0</color>
+    <color name="signout_button_default_text">#3949AB</color>
+    <color name="signout_button_pressed_text">#283593</color>
     <!-- Array of colors that will be used by ViewPager as background colors -->
     <array name="colorPagesViewPager">
         <item>#EDD9CF</item>
