@@ -19,6 +19,7 @@ import com.ensias.hygieia.fireStoreApi.DatabaseHelper;
 import com.ensias.hygieia.fireStoreApi.DoctorHelper;
 import com.ensias.hygieia.fireStoreApi.PatientHelper;
 import com.ensias.hygieia.fireStoreApi.UploadImageHelper;
+import com.ensias.hygieia.fireStoreApi.UserHelper;
 import com.ensias.hygieia.model.Doctor;
 import com.ensias.hygieia.model.Patient;
 import com.ensias.hygieia.model.UploadImage;
@@ -88,12 +89,12 @@ public class FirstSigninActivity extends AppCompatActivity {
                 specialitate = specialitateList.getSelectedItem().toString();
                 SharedPreferences sharedPrefs = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
                 String email = sharedPrefs.getString("email", "");
-                String defaultImageUri = "android.resource://com.ensias.hygieia/drawable/index.png"; // Replace with the actual URI of the default image
-
+                String defaultImageUri = "android.resource://com.ensias.hygieia/drawable/index.png";
+                UserHelper.updateUserType(type, email);
                 UploadImage defaultImage = new UploadImage(email, defaultImageUri);
                 UploadImageHelper.addImage(defaultImage);
                 if (type.equals("Pacient")) {
-                    Patient user = new Patient(fullname, "test", tel, email, birthDay);
+                    Patient user = new Patient( email, fullname,  tel, birthDay);
                     PatientHelper.addPatient(user);
                    //UserHelper.addUser(fullname, "address", tel, type, birthDay);
                     System.out.println("Pacientul " + fullname + " adaugat cu succes");

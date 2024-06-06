@@ -70,50 +70,9 @@ public class ProfileDoctorActivity extends AppCompatActivity {
                     .load(selectedImageUri)
                     .into(doctorImage);
         }
-       AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setCancelable(true).build();
-       dialog.show();
+//       AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setCancelable(true).build();
+//       dialog.show();
 
-
-
-//        final String imageUri = sharedPrefs.getString("poza", "");
-//
-//        if (!TextUtils.isEmpty(imageUri)) {
-//            File imgFile = new File(imageUri);
-//            if (imgFile.exists()) {
-//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                doctorImage.setImageBitmap(myBitmap);
-//            } else {
-//                doctorImage.setImageResource(R.drawable.index);
-//            }
-//        } else {
-//            doctorImage.setImageResource(R.drawable.index);
-//        }
-
-
-
-//        final String imageUri = sharedPrefs.getString("poza", "");
-//
-//        if (!TextUtils.isEmpty(imageUri)) {
-//            Picasso.with(this)
-//                    .load(Uri.parse(imageUri))
-//                    .fit()
-//                    .centerCrop()
-//                    .into(doctorImage, new Callback() {
-//                        @Override
-//                        public void onSuccess() {
-//                            // Image loaded successfully, do nothing
-//                        }
-//
-//                        @Override
-//                        public void onError() {
-//                            // Error occurred while loading image, show default image instead
-//                            doctorImage.setImageResource(R.drawable.index);
-//                        }
-//                    });
-//        } else {
-//            // No image URI found in SharedPreferences, show default image instead
-//            doctorImage.setImageResource(R.drawable.index);
-//        }
 
 
         Doctor doctor = DoctorHelper.getDoctor(userId);

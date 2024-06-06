@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorAppointementActivity extends Activity {
-     private DoctorAppointementAdapter adapter;
+    private DoctorAppointementAdapter adapter;
     private DatabaseHelper databaseHelper;
 
     @Override
@@ -34,27 +34,20 @@ public class DoctorAppointementActivity extends Activity {
         DoctorHelper.init(database);
         ApointementInformationHelper.init(database);
         setContentView(R.layout.activity_doctor_appointement);
-        setUpRecyclerView();
+        setUpRecyclerView(database);
     }
 
-    public void setUpRecyclerView() {
+    public void setUpRecyclerView(SQLiteDatabase database) {
         // Get the doctors by patient id
         SharedPreferences sharedPrefs = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         final String doctorID = sharedPrefs.getString("email", "");
         final String nume = sharedPrefs.getString("nume", "");
 
-       // List<ApointementInformation> appointments = ApointementInformationHelper.getAppointmentInformation(doctorID);
-
-        List<ApointementInformation> otherappointments = new ArrayList<>();
-        ApointementInformation appointment1 = new ApointementInformation("Mia Iovan", "05.19.2023", doctorID, nume, "mia2002@yahoo.com", "In asteptare", "Consultatie Online", 45);
-        ApointementInformation appointment2 = new ApointementInformation("Max Lucas", "05.23.2023", doctorID, nume, "max_lucas@yahoo.com", "In asteptare", "Consultatie Online", 50);
-        otherappointments.add(appointment1);
-        otherappointments.add(appointment2);
+        List<ApointementInformation> appointments = ApointementInformationHelper.getAppointmentInformation(doctorID);
 
         List<ApointementInformation> allAppointments = new ArrayList<>();
-        allAppointments.addAll(otherappointments);
-       // allAppointments.addAll(appointments);
-        DoctorAppointementAdapter adapter = new DoctorAppointementAdapter(allAppointments);
+        allAppointments.addAll(appointments);
+        DoctorAppointementAdapter adapter = new DoctorAppointementAdapter(allAppointments, this, database);
 
         // Set up RecyclerView
         RecyclerView recyclerView = findViewById(R.id.DoctorAppointement);
@@ -62,8 +55,9 @@ public class DoctorAppointementActivity extends Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
-
-
-
-
 }
+
+
+
+
+

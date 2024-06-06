@@ -1,8 +1,8 @@
 package com.ensias.hygieia.model;
 
 public class ApointementInformation {
-    private  String patientName,time,doctorId,doctorName,patientId,type,apointementType;
-    private long slot;
+    private int id;
+    private  String patientName,date,doctorId,doctorName,patientId,type,apointementType;
 
 
     public String getApointementType() {
@@ -13,7 +13,21 @@ public class ApointementInformation {
         this.apointementType = apointementType;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getType() {
         return type;
@@ -34,19 +48,18 @@ public class ApointementInformation {
     public ApointementInformation(){
     }
 
-    public ApointementInformation(String patientName, String time, String doctorId, String doctorName, long slot) {
+    public ApointementInformation(String patientName, String time, String doctorId, String doctorName) {
         this.patientName = patientName;
-        this.time = time;
+        this.date = time;
         this.doctorId = doctorId;
         this.doctorName = doctorName;
-        this.slot = slot;
     }
-    public ApointementInformation(String patientName, String time, String doctorId, String doctorName, String patientId, String type, String apointementType, long slot) {
+    public ApointementInformation(int id, String patientName, String time, String doctorId, String doctorName, String patientId, String type, String apointementType) {
+        this.id = id;
         this.patientName = patientName;
-        this.time = time;
+        this.date = time;
         this.doctorId = doctorId;
         this.doctorName = doctorName;
-        this.slot = slot;
         this.apointementType = apointementType;
         this.patientId = patientId;
         this.type = type;
@@ -61,11 +74,11 @@ public class ApointementInformation {
     }
 
     public String getTime() {
-        return time;
+        return date;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.date = time;
     }
 
     public String getDoctorId() {
@@ -84,11 +97,4 @@ public class ApointementInformation {
         this.doctorName = doctorName;
     }
 
-    public long getSlot() {
-        return slot;
-    }
-
-    public void setSlot(long slot) {
-        this.slot = slot;
-    }
 }

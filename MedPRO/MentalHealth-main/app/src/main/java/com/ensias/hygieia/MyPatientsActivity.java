@@ -11,6 +11,7 @@ import com.ensias.hygieia.fireStoreApi.DatabaseHelper;
 import com.ensias.hygieia.fireStoreApi.DoctorHelper;
 import com.ensias.hygieia.fireStoreApi.PatientHelper;
 import com.ensias.hygieia.fireStoreApi.UserHelper;
+import com.ensias.hygieia.model.ApointementInformation;
 import com.ensias.hygieia.model.Patient;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,23 +46,24 @@ public class MyPatientsActivity extends AppCompatActivity {
         final String doctorID = sharedPrefs.getString("email", "");
         final String nume = sharedPrefs.getString("nume", "");
 
-//        List<ApointementInformation> appointments = ApointementInformationHelper.getConfirmedAppointmentInformation(doctorID);
-//        List<Patient> myPatientsList = new ArrayList<>();
+        List<ApointementInformation> appointments = ApointementInformationHelper.getConfirmedAppointmentInformation(doctorID);
+        List<Patient> myPatientsList = new ArrayList<>();
+
+        for (ApointementInformation appointment : appointments) {
+            Patient patient = PatientHelper.getMyPatients(appointment.getPatientId());
+            myPatientsList.add(patient);
+        }
+
+
+//        List<Patient> otherappointments = new ArrayList<>();
+//        Patient appointment1 = new Patient("Julia Popescu", "0835675554", "julia_popescu@yahoo.com", "12.12.2001");
+//        Patient appointment2 = new Patient("Perseus Cozma", "0513202399", "perseus_cozma@yahoo.com", "10.09.2004");
 //
-//        for (ApointementInformation appointment : appointments) {
-//            Patient patient = PatientHelper.getMyPatients(appointment.getPatientId());
-//            myPatientsList.add(patient);
-//        }
-
-
-        List<Patient> otherappointments = new ArrayList<>();
-        Patient appointment1 = new Patient("Julia Popescu", "0835675554", "julia_popescu@yahoo.com", "12.12.2001");
-        Patient appointment2 = new Patient("Perseus Cozma", "0513202399", "perseus_cozma@yahoo.com", "10.09.2004");
-        otherappointments.add(appointment1);
-        otherappointments.add(appointment2);
+//        otherappointments.add(appointment1);
+//        otherappointments.add(appointment2);
 
         List<Patient> allAppointments = new ArrayList<>();
-        allAppointments.addAll(otherappointments);
+        allAppointments.addAll(myPatientsList);
 
         adapter = new MyPatientsAdapter(allAppointments);
         //ListMyPatients

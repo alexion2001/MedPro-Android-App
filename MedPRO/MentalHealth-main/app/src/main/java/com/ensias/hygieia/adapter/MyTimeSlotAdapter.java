@@ -128,7 +128,6 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                                 apointementInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                                         .append("at")
                                         .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
-                                apointementInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
 
 

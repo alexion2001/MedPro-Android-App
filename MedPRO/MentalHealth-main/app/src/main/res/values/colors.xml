@@ -8,6 +8,8 @@
     <color name="login_button_pressed_text">#E0E0E0</color>
     <color name="signout_button_default_text">#3949AB</color>
     <color name="signout_button_pressed_text">#283593</color>
+    <color name="Gri">#999</color>
+    <color name="hintTextColor">#333</color>
     <!-- Array of colors that will be used by ViewPager as background colors -->
     <array name="colorPagesViewPager">
         <item>#EDD9CF</item>

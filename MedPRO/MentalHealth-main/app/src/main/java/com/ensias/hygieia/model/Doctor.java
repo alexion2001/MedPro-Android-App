@@ -10,7 +10,6 @@ public class Doctor {
     private String specialitate;
 
     public Doctor(){
-        //needed for firebase
     }
 
     public Doctor(String name, String address, String tel, String email,String birthday, String specialitate) {

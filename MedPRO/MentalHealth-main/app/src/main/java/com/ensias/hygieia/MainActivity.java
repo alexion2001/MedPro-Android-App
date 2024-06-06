@@ -1,6 +1,5 @@
 package com.ensias.hygieia;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -20,11 +19,11 @@ import com.ensias.hygieia.fireStoreApi.DoctorHelper;
 import com.ensias.hygieia.fireStoreApi.PatientHelper;
 import com.ensias.hygieia.fireStoreApi.UserHelper;
 import com.ensias.hygieia.model.Doctor;
+import com.ensias.hygieia.model.MockTokenManager;
 import com.ensias.hygieia.model.Patient;
 import com.ensias.hygieia.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -37,8 +36,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
 
+
 public class MainActivity extends AppCompatActivity {
     private static int RC_SIGN_IN = 100;
+    private static final String TAG = "MainActivity";
+
     private Button signUpBtn;
     private EditText emailText;
     private EditText passwordText;
@@ -47,18 +49,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText secondPass;
     private EditText confirme;
     SignInButton signInButton;
+    private MockTokenManager mockTokenManager;
 
     private DatabaseHelper databaseHelper;
 
-    GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         databaseHelper = new DatabaseHelper(this);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         UserHelper.init(database);
@@ -82,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = (Button)findViewById(R.id.LoginBtn);
         creatBtn = findViewById(R.id.CreateAccount);
         signUpBtn.setVisibility(View.GONE);
+        mockTokenManager = new MockTokenManager(this);
+
 
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,28 +102,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent k = new Intent(MainActivity.this, FirstSigninActivity.class);
                     startActivity(k);
 
-
-
-//                mAuth.createUserWithEmailAndPassword(email, password)
-//                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    // Sign in success, update UI with the signed-in user's information
-//                                    Log.d("TAG", "createUserWithEmail:success");
-//                                    FirebaseUser user = mAuth.getCurrentUser();
-//                                    //updateUI(user);
-//                                } else {
-//                                    // If sign in fails, display a message to the user.
-//                                    Log.w("TAG", "createUserWithEmail:failure", task.getException());
-//                                    Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                            Toast.LENGTH_SHORT).show();
-////                                    updateUI(null);
-//                                }
-//
-//                                // ...
-//                            }
-//                        });
             }else{
                     Toast.makeText(MainActivity.this, "Trebuie sa completati toate campurile",
                             Toast.LENGTH_SHORT).show();
@@ -135,58 +113,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email=emailText.getText().toString();
-                String password=passwordText.getText().toString();
+                String email = emailText.getText().toString();
+                String password = passwordText.getText().toString();
 
-                if(!email.isEmpty() && !password.isEmpty() ){
-                User user = UserHelper.getUser(email);
-                if(user != null){
-                    String hashPassword = hashPassword(password, user.getSalt());
-                    if(hashPassword.equals( user.getPassword())){
-                        Log.d("TAG", "signInWithEmail:success");
-                        SharedPreferences shared = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor edit = shared.edit();
-                        edit.putString("email", email);
-                        edit.putString("rol", user.getType());
-                        edit.apply();
-                        if(user.getType().equals("Patient")){
-                            Patient patient = PatientHelper.getPatient(email);
-                            edit.putString("nume", patient.getName());
-                            edit.apply();
-                            Intent k = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(k);
-                        }
-                        else{
-                            Doctor doctor = DoctorHelper.getDoctor(email);
-                            edit.putString("nume", doctor.getName());
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    User user = UserHelper.getUser(email);
+                    if (user != null) {
+                        String hashPassword = hashPassword(password, user.getSalt());
+                        if (hashPassword.equals(user.getPassword())) {
+                            Log.d(TAG, "signInWithEmail:success");
+
+                            mockTokenManager.saveTokens("mockAccessToken", "mockRefreshToken", user.getType(), user.getEmail());
+
+                            SharedPreferences shared = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor edit = shared.edit();
+                            edit.putString("email", email);
+                            edit.putString("rol", user.getType());
                             edit.apply();
 
-
-
-                            Intent k = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(k);
-                            //Snackbar.make(findViewById(R.id.main_layout), "Doctor interface entraint de realisation", Snackbar.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-
-                 else {
-                                    // If sign in fails, display a message to the user.
-                       Log.w("TAG", "signInWithEmail:failure");
-                       Toast.makeText(MainActivity.this, "Nu exista cont cu datele oferite",Toast.LENGTH_SHORT).show();
-                                   // updateUI(null);
-
-
-
+                            if (user.getType().equals("Pacient")) {
+                                Patient patient = PatientHelper.getPatient(email);
+                                edit.putString("nume", patient.getName());
+                                edit.apply();
+                                Intent k = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(k);
+                            } else {
+                                Doctor doctor = DoctorHelper.getDoctor(email);
+                                edit.putString("nume", doctor.getName());
+                                edit.apply();
+                                Intent k = new Intent(MainActivity.this, DoctorHomeActivity.class);
+                                startActivity(k);
                             }
-
-            }else{
-                    Toast.makeText(MainActivity.this, "Trebuie să completați toate câmpurile",
-                            Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.w(TAG, "signInWithEmail:failure");
+                        Toast.makeText(MainActivity.this, "No account found with the provided details", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -213,28 +184,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent,RC_SIGN_IN);
-            }
-        });
-
     }
-    //@Override
-  //  public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-  //  }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // Close the database connection when the activity is destroyed
-        databaseHelper.close();
+            databaseHelper.close();
+
     }
 
     @Override
@@ -257,45 +214,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-//    private void updateUI() {
-//        SharedPreferences sharedPrefs = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
-//        String email = sharedPrefs.getString("email", "");
-//        if(email!=null){
-//            try {
-//                UsersRef.document(currentUser.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        if (documentSnapshot.exists()) {
-//                            UsersRef.document(currentUser.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                                @Override
-//                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                                    User user=documentSnapshot.toObject(User.class);
-//                                    if(user.getType().equals("Patient")){
-//                                        Intent k = new Intent(MainActivity.this, HomeActivity.class);
-//                                        startActivity(k);
-//                                    }else{
-//                                        Intent k = new Intent(MainActivity.this, DoctorHomeActivity.class);
-//                                        startActivity(k);
-//                                        //Snackbar.make(findViewById(R.id.main_layout), "Doctor interface entraint de realisation", Snackbar.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//
-//
-//
-//                        } else {
-//                            Intent k = new Intent(MainActivity.this, FirstSigninActivity.class);
-//                            startActivity(k);
-//                        }
-//                    }
-//                });
-//            } catch(Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +

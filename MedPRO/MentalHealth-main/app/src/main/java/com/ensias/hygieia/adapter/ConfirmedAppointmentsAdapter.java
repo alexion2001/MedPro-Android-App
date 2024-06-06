@@ -24,8 +24,9 @@ public class ConfirmedAppointmentsAdapter extends RecyclerView.Adapter<Confirmed
     private Context context;
     private static final int DEFAULT_IMAGE_RESOURCE = R.drawable.userprofile;
 
-    public ConfirmedAppointmentsAdapter(List<ApointementInformation> appointments) {
+    public ConfirmedAppointmentsAdapter(List<ApointementInformation> appointments, Context context) {
         this.appointments = appointments;
+        this.context = context;
     }
 
     @NonNull

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ensias.hygieia.Common.Common;
+import com.ensias.hygieia.model.MockTokenManager;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,11 +19,21 @@ public class HomeActivity extends AppCompatActivity {
     Button profile;
     Button appointment;
     Button drugsBtn;
+    private MockTokenManager mockTokenManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         appointment = findViewById(R.id.appointement2);
+        appointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(HomeActivity.this, AppointementActivity.class);
+                startActivity(k);
+            }
+        });
+        mockTokenManager = new MockTokenManager(this);
 
         searchPatBtn = (Button)findViewById(R.id.searchBtn);
 
@@ -31,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                mockTokenManager.clearTokens();
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

@@ -23,16 +23,15 @@ import com.ensias.hygieia.fireStoreApi.DatabaseHelper;
 import com.ensias.hygieia.fireStoreApi.DoctorHelper;
 import com.ensias.hygieia.fireStoreApi.UserHelper;
 import com.ensias.hygieia.databinding.ActivityDoctorHomeBinding;
+import com.ensias.hygieia.model.MockTokenManager;
 
 import java.util.Calendar;
 
 public class DoctorHomeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     static String doc;
-    Button SignOutBtn2;
-    Button BtnRequst;
-    Button listPatients;
-    Button appointementBtn;
+
     Button drugsBtn;
+    private MockTokenManager mockTokenManager;
 
     private DatabaseHelper databaseHelper;
     private ActivityDoctorHomeBinding binding;
@@ -42,6 +41,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         binding = ActivityDoctorHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mockTokenManager = new MockTokenManager(this);
 
         // Set up database
         databaseHelper = new DatabaseHelper(this);
@@ -61,23 +61,23 @@ public class DoctorHomeActivity extends AppCompatActivity implements DatePickerD
         }
 
         // Set up notification intent
-        Intent intent = new Intent(this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
-        );
+//        Intent intent = new Intent(this, NotificationReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+//                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
+//        );
 
         // Set up alarm
         SharedPreferences sharedPrefs = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         final String doctorID = sharedPrefs.getString("email", "");
-        if (doctorID != null && !doctorID.isEmpty()) {
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(
-                    AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 1200, // Start after 2 minutes
-                    1200, // Repeat every 2 minutes
-                    pendingIntent
-            );
-        }
+//        if (doctorID != null && !doctorID.isEmpty()) {
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//            alarmManager.setRepeating(
+//                    AlarmManager.RTC_WAKEUP,
+//                    System.currentTimeMillis() + 1200, // Start after 2 minutes
+//                    1200, // Repeat every 2 minutes
+//                    pendingIntent
+//            );
+//        }
 
         // Set up click listeners
         binding.profile.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +109,8 @@ public class DoctorHomeActivity extends AppCompatActivity implements DatePickerD
                 edit.remove("profile_image");
                 edit.remove("nume");
                 edit.apply();
+                mockTokenManager.clearTokens();
+
                 Toast.makeText(getApplicationContext(), "You exit your account", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

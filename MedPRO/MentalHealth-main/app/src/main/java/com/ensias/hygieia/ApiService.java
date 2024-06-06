@@ -10,4 +10,5 @@ import retrofit2.http.GET;
 public interface ApiService {
     @GET("medicine/short")
     Call<List<DrugModel>> getDrugs();
+
 }
